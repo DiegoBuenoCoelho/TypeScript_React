@@ -1,0 +1,145 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  /* padding: 2rem; */
+  text-align: center;
+  background-color: #474646;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+.appMain {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: yellowgreen;
+  background-color: black;
+  padding: 1em;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: forestgreen;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  height: 3em;
+}
+
+main {
+  margin-top: 1em;
+  background-color: #213547;
+  border-radius: 1em;
+  padding: 0.25em;
+  color: white;
+
+  display: flex;
+  flex-direction: row;
+  gap: 0.25em;
+  flex-grow: 1;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  width: 500px;
+
+}
+
+article {
+  width: 200px;
+  border: 1px solid white;
+  border-radius: 0.5em;
+  flex-grow: 1;
+  padding: 0.2em;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  background-color: #474646;
+  padding: 1rem;
+
+  p {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-content: flex-start;
+    padding: 0.1em;
+    margin: 0.1em;
+
+    label {
+      padding-right: 0.25em;
+    }
+
+    input {
+      width: 100%;
+      height: 2rem;
+      line-height: 2rem;
+      font-size: 1rem;
+      margin: 0em;
+    }
+
+    padding-bottom: 1em;
+  }
+}
+
+.infoBox {
+  border: 1px solid yellow;
+  padding: 0.25em;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  &.infobox--low {
+    background-color: pink;
+  }
+
+  &.infobox--medium {
+    background-color: orange;
+  }
+
+  &.infobox--high {
+    background-color: orangered;
+  }
+}
