@@ -7,3 +7,5 @@ export const appStore = configureStore({
 		cart: cartSlice.reducer,
 	},
 });
+
+export type AppDispatch = typeof appStore.dispatch;

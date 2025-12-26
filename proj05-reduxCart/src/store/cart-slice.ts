@@ -15,7 +15,7 @@ const initialState: CartState = {
 };
 
 //------------------------ METHODS
-const addToCart = (
+const fnAddToCart = (
 	state: CartState,
 	action: PayloadAction<{ id: string; title: string; price: number }>
 ) => {
@@ -27,7 +27,7 @@ const addToCart = (
 		state.items.push({ ...action.payload, qtty: 1 });
 	}
 };
-const removeFromCart = (state: CartState, action: PayloadAction<string>) => {
+const fnRemoveFromCart = (state: CartState, action: PayloadAction<string>) => {
 	const itemIndex = state.items.findIndex((thisItem) => thisItem.id === action.payload);
 	if (itemIndex === 1) {
 		state.items.splice(itemIndex, 1);
@@ -40,7 +40,9 @@ export const cartSlice = createSlice({
 	name: "cart",
 	initialState,
 	reducers: {
-		addToCart,
-		removeFromCart,
+		addToCart: fnAddToCart,
+		removeFromCart: fnRemoveFromCart,
 	},
 });
+
+export const { addToCart, removeFromCart } = cartSlice.actions;
