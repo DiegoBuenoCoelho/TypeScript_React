@@ -9,11 +9,11 @@ type ProductProps = {
 	description: string;
 };
 
-export const Product = ({ id, image, title, price, description }: ProductProps) => {
+const Product = ({ id, image, title, price, description }: ProductProps) => {
 	const fnDispatch = useCartDispatch();
 
 	function handleAddToCart() {
-		const myAction = addToCart({ id: id, title, price });
+		const myAction = addToCart({ id, title, price });
 		fnDispatch(myAction);
 	}
 
@@ -36,3 +36,5 @@ export const Product = ({ id, image, title, price, description }: ProductProps) 
 		</article>
 	);
 };
+
+export default Product;

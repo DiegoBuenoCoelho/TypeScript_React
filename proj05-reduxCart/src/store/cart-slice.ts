@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-type CartItem = {
+export type CartItem = {
 	id: string;
 	title: string;
 	price: number;
@@ -29,10 +29,15 @@ const fnAddToCart = (
 };
 const fnRemoveFromCart = (state: CartState, action: PayloadAction<string>) => {
 	const itemIndex = state.items.findIndex((thisItem) => thisItem.id === action.payload);
-	if (itemIndex === 1) {
-		state.items.splice(itemIndex, 1);
-	} else {
-		state.items[itemIndex].qtty--;
+	console.log({ itemIndex });
+	if (itemIndex >= 0) {
+		const thisItem = state.items[itemIndex];
+		// console.log({ itemIndex }, "item: ", state.items[itemIndex]);
+		if (thisItem.qtty === 1) {
+			state.items.splice(itemIndex, 1);
+		} else {
+			state.items[itemIndex].qtty--;
+		}
 	}
 };
 //------------------------ SLICE DECLARATION

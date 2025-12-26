@@ -1,30 +1,38 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-import Cart from './Cart.tsx';
+import Cart from "./Cart.tsx";
+import { useCartSelector } from "../store/hooks.ts";
 
 export default function Header() {
-  const [cartIsVisible, setCartIsVisible] = useState(false);
+	const [cartIsVisible, setCartIsVisible] = useState(false);
 
-  function handleOpenCartClick() {
-    setCartIsVisible(true);
-  }
+	const cartQttyt = useCartSelector((latestState) =>
+		latestState.cart.items.reduce((val, item) => val + item.qtty, 0)
+	);
 
-  function handleCloseCartClick() {
-    setCartIsVisible(false);
-  }
+	function handleOpenCartClick() {
+		setCartIsVisible(true);
+	}
 
-  return (
-    <>
-      {cartIsVisible && <Cart onClose={handleCloseCartClick} />}
-      <header id="main-header">
-        <div id="main-title">
-          <img src="logo.png" alt="Elegant model" />
-          <h1>Elegant Redux</h1>
-        </div>
-        <p>
-          <button onClick={handleOpenCartClick}>Cart (0)</button>
-        </p>
-      </header>
-    </>
-  );
+	function handleCloseCartClick() {
+		setCartIsVisible(false);
+	}
+
+	return (
+		<>
+			{cartIsVisible && <Cart onClose={handleCloseCartClick} />}
+			<header id="main-header">
+				<div id="main-title">
+					<img
+						src="logo.png"
+						alt="Elegant model"
+					/>
+					<h1>Elegant Redux</h1>
+				</div>
+				<p>
+					<button onClick={handleOpenCartClick}>Cart ({cartQttyt})</button>
+				</p>
+			</header>
+		</>
+	);
 }
