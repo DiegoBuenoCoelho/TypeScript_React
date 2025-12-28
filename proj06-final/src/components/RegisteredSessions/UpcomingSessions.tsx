@@ -31,7 +31,7 @@ const UpcomingSessions: FC<UpcomingSessionsProps> = (obProps) => {
 			>
 				Upcoming Sessions
 			</h3>
-			{!hasRegisteredSessions && <p>No registed Sessions, cabron</p>}
+			{!hasRegisteredSessions && <p>No registered Sessions, cabron</p>}
 			<p className="actions">
 				<Button onClick={onClose}>Close</Button>
 			</p>

@@ -7,7 +7,7 @@ type BasicProps = {
 };
 
 type ButtonProps = BasicProps & ComponentPropsWithoutRef<"button"> & { to: never };
-type ButtonLinkProps = BasicProps & LinkProps & { to: string };
+type ButtonLinkProps = BasicProps & ComponentPropsWithoutRef<"link"> & LinkProps & { to: string };
 
 const isRouterLink = (props: ButtonProps | ButtonLinkProps): props is ButtonLinkProps => {
 	return "to" in props;
