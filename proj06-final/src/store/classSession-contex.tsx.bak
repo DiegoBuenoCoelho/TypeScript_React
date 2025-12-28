@@ -1,0 +1,119 @@
+import { type ReactNode, createContext, useContext, useReducer } from "react";
+// import { SessionItem } from "../components/Sessions/SessionItem";
+
+export type Class = {
+	id: string;
+	title: string;
+	summary: string;
+	description: string;
+	date: string;
+	image: string;
+	duration: number;
+};
+
+// type responsible for storing the Class Sessions data
+type ClassState = {
+	upcomingSessions: Class[];
+};
+
+// type responsible for storing the Class Sessions data PLLUS the methods available
+type SessionContextValue = ClassState & {
+	bookSession: (session: Class) => void;
+	cancelSession: (sessionId: string) => void;
+};
+
+export const SessionsContext = createContext<SessionContextValue | null>(null);
+
+//------------------------------------------------------------------------------------------
+
+//--------------------------------------------------- HOOK
+// Hook to use in the application to consume the context
+export function useClassesSessionContext() {
+	const context = useContext(SessionsContext);
+	if (!context) {
+		throw new Error("useSessionsContext must be used within a SessionsContextProvider");
+	}
+	return context;
+}
+
+//--------------------------------------------------- ACTIONS
+type BookClassAction = {
+	type: "BOOK_SESSION";
+	session: Class;
+};
+type CancelClassAction = {
+	type: "CANCEL_SESSION";
+	sessionId: string;
+};
+
+type SessionsAction = BookClassAction | CancelClassAction;
+
+// ============================================================================== REDUCER
+// Reducer is the method that is standard for this kind of process
+// It has the State (VALUES STORED) and the ACTION (Which will depctic what is going to happen)
+// const classSessionsReducer2 = (state: ClassSessionState, action: ClassSessionsAction) => {
+// 	if (action.type === "BOOK_SESSION") {
+// 		if (state.upcomingClassSessions.some((session) => session.id === action.classSession.id)) {
+// 			return state;
+// 		}
+// 		return {
+// 			upcomingSessions: state.upcomingClassSessions.concat(action.classSession),
+// 		};
+// 	}
+
+// 	if (action.type === "CANCEL_SESSION") {
+// 		return {
+// 			upcomingSessions: state.upcomingClassSessions.filter(
+// 				(session) => session.id !== action.sessionId
+// 			),
+// 		};
+// 	}
+
+// 	return state;
+// };
+
+function sessionsReducer(state: ClassState, action: SessionsAction) {
+	if (action.type === "BOOK_SESSION") {
+		if (state.upcomingSessions.some((session) => session.id === action.session.id)) {
+			return state;
+		}
+		return {
+			upcomingSessions: state.upcomingSessions.concat(action.session),
+		};
+	}
+
+	if (action.type === "CANCEL_SESSION") {
+		return {
+			upcomingSessions: state.upcomingSessions.filter(
+				(session) => session.id !== action.sessionId
+			),
+		};
+	}
+
+	return state;
+}
+
+// ============================================================================== PROVIDER
+export const SessionsContextProvider = ({ children }: { children: ReactNode }) => {
+	const [sessionsState, dispatch] = useReducer(sessionsReducer, {
+		upcomingClassSessions: [],
+	});
+
+	function bookSession(session: Session) {
+		dispatch({ type: "BOOK_SESSION", session });
+	}
+
+	function cancelSession(sessionId: string) {
+		dispatch({ type: "CANCEL_SESSION", sessionId });
+	}
+
+	const ctxValue = {
+		upcomingClassSessions: sessionsState.upcomingClassSessions,
+		bookSession,
+		cancelSession,
+	};
+
+	return <SessionsContext.Provider value={ctxValue}>{children}</SessionsContext.Provider>;
+};
+
+export default SessionsContextProvider;

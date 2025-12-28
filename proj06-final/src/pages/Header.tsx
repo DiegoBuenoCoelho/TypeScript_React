@@ -39,7 +39,12 @@ const Header = () => {
 							</NavLink>
 						</li>
 						<li>
-							<Button onClick={showUpcomingSessions}>Upcoming Sessions</Button>
+							<Button
+								onClick={showUpcomingSessions}
+								textOnly={false}
+							>
+								Upcoming Sessions
+							</Button>
 						</li>
 					</ul>
 				</nav>
