@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import Button from "../components/HTML/Button";
 import { useState } from "react";
-import UpcomingSessions from "../components/SESSIONS/UpcomingSessions";
+import UpcomingSessions from "../components/RegisteredSessions/UpcomingSessions";
 
 const Header = () => {
 	const [upcomingSessionsVisible, setUpcomingSessionsVisible] = useState<boolean>(false);
